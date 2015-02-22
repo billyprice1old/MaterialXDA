@@ -11,5 +11,47 @@
 		layout="@layout/app_bar"
         android:id="@+id/app_bar"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/app_bar">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editText"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:id="@+id/buttonLayout">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/saveButton"
+                android:layout_weight="1"
+                android:text="Save"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/loadButton"
+                android:layout_weight="1"
+                android:text="Load"/>
+
+            </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/buttonLayout"
+            android:id="@+id/textView"/>
+
+        </RelativeLayout>
+
 </RelativeLayout>
 

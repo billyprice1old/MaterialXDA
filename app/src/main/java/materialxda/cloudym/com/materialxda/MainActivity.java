@@ -5,11 +5,19 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements View.OnClickListener{
 
     Toolbar toolbar;
+    EditText editText;
+    TextView textView;
+    Button saveButton, loadButton;
+    SavingAndLoading savingAndLoading = new SavingAndLoading();
 
 
     @Override
@@ -23,11 +31,30 @@ public class MainActivity extends ActionBarActivity {
     //All of the variables are set up from here with different methods to keep everything clear and easy to understand.
     public void variables(){
         toolbars();
+        editTexts();
+        textViews();
+        buttons();
     }
 
     public void toolbars(){
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
+    }
+
+    public void editTexts(){
+        editText = (EditText) findViewById(R.id.editText);
+    }
+
+    public void textViews(){
+        textView = (TextView) findViewById(R.id.textView);
+    }
+
+    public void buttons(){
+        saveButton = (Button) findViewById(R.id.saveButton);
+        loadButton = (Button) findViewById(R.id.loadButton);
+
+        saveButton.setOnClickListener(this);
+        loadButton.setOnClickListener(this);
     }
 
 
@@ -60,5 +87,23 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        String writtenText = editText.getText().toString();
+        String loadedText;
+
+        switch (v.getId()){
+            case R.id.saveButton:
+                savingAndLoading.save(this, "testi", writtenText);
+                break;
+
+            case R.id.loadButton:
+                loadedText = savingAndLoading.load(this, "testi");
+                textView.setText(loadedText);
+                break;
+        }
     }
 }
