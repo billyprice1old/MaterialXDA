@@ -58,6 +58,28 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
 
+    @Override
+    public void onClick(View v) {
+
+        String writtenText = editText.getText().toString();
+        String loadedText;
+
+        switch (v.getId()){
+            case R.id.saveButton:
+                savingAndLoading.saveString(this, "testi", writtenText);
+                break;
+
+            case R.id.loadButton:
+                loadedText = savingAndLoading.loadString(this, "testi");
+                textView.setText(loadedText);
+                break;
+        }
+    }
+
+
+
+
+
 
 
 
@@ -87,23 +109,5 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onClick(View v) {
-
-        String writtenText = editText.getText().toString();
-        String loadedText;
-
-        switch (v.getId()){
-            case R.id.saveButton:
-                savingAndLoading.save(this, "testi", writtenText);
-                break;
-
-            case R.id.loadButton:
-                loadedText = savingAndLoading.load(this, "testi");
-                textView.setText(loadedText);
-                break;
-        }
     }
 }
