@@ -2,17 +2,42 @@ package materialxda.cloudym.com.materialxda;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
 public class MainActivity extends ActionBarActivity {
 
+    Toolbar toolbar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        variables();
     }
+
+    //All of the variables are set up from here with different methods to keep everything clear and easy to understand.
+    public void variables(){
+        toolbars();
+    }
+
+    public void toolbars(){
+        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
+    }
+
+
+
+
+
+
+
+
+
 
 
     @Override

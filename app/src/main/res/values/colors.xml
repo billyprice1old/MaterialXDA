@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+    <!--Application colors are defined here..-->
+
 <resources>
     <color name="primaryColor">#FF9800</color>
     <color name="primaryColorDark">#F57C00</color>
