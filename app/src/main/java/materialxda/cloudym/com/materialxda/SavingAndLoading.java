@@ -10,131 +10,155 @@ import android.content.SharedPreferences;
 
 //This class helps with saving, and reading from SharedPreferences.
 public class SavingAndLoading extends Activity {
-
-    SharedPreferences preferences;
-    SharedPreferences.Editor editor;
-
-
-    //used to save a String value to the SharedPreferences
-    public void saveString(Context context, String key, String value){
-        preferences = context.getSharedPreferences("Settings", MODE_PRIVATE);
-        editor = preferences.edit();
-
-        editor.putString(key, value);
-
-        editor.apply();
-
-    }
-
-    //used to load a String value from the SharedPreferences
-    public String loadString(Context context, String key){
-        preferences = context.getSharedPreferences("Settings", MODE_PRIVATE);
-
-
-        String value;
-        value = preferences.getString(key, "Not Found");
-
-        return value;
-    }
+    //Variables are first created here.
+    public SharedPreferences sharedPreferences;
+    public SharedPreferences.Editor editor;
+    public String preferenceFilename = "Settings";
 
 
 
 
 
+    //-----     Saving      ------
 
 
+    public void saveString(Context context, String valueName, String value) {
+        sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
-
-
-
-
-
-
-    //used to save an int value to the SharedPreferences
-    public void saveInt(Context context, String key, int value){
-        preferences = context.getSharedPreferences("Settings", MODE_PRIVATE);
-        editor = preferences.edit();
-
-        editor.putInt(key, value);
+        editor.putString(valueName, value);
 
         editor.apply();
 
     }
 
-    //used to load an int value from the SharedPreferences
-    public int loadInt(Context context, String key){
-        preferences = context.getSharedPreferences("Settings", MODE_PRIVATE);
+    public void saveInt(Context context, String valueName, int value) {
+        sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
-
-        int value;
-        value = preferences.getInt(key, 0);
-
-        return value;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-    //used to save a boolean value to the SharedPreferences
-    public void saveBoolean(Context context, String key, boolean value){
-        preferences = context.getSharedPreferences("Settings", MODE_PRIVATE);
-        editor = preferences.edit();
-
-        editor.putBoolean(key, value);
+        editor.putInt(valueName, value);
 
         editor.apply();
 
     }
 
-    //used to load a boolean value from the SharedPreferences
-    public boolean loadBoolean(Context context, String key){
-        preferences = context.getSharedPreferences("Settings", MODE_PRIVATE);
+    public void saveBoolean(Context context, String valueName, boolean value) {
+        sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
-
-        boolean value;
-        value = preferences.getBoolean(key, false);
-
-        return value;
-    }
-
-
-
-
-
-
-
-
-
-
-
-    //used to save a float value to the SharedPreferences
-    public void saveFloat(Context context, String key, float value){
-        preferences = context.getSharedPreferences("Settings", MODE_PRIVATE);
-        editor = preferences.edit();
-
-        editor.putFloat(key, value);
+        editor.putBoolean(valueName, value);
 
         editor.apply();
 
     }
 
-    //used to load a float value from the SharedPreferences
-    public float loadFloat(Context context, String key){
-        preferences = context.getSharedPreferences("Settings", MODE_PRIVATE);
+    public void saveFloat(Context context, String valueName, float value) {
+        sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
+        editor.putFloat(valueName, value);
 
-        float value;
-        value = preferences.getFloat(key, 0);
+        editor.apply();
 
-        return value;
     }
 
+    public void saveLong(Context context, String valueName, long value) {
+        sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
+        editor.putLong(valueName, value);
+
+        editor.apply();
+
+    }
+
+
+    //-----     Loading      ------
+
+    public String loadString(Context context, String valueName) {
+
+        if (valueName != null) {
+            sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
+
+            String loadedStringValue;
+            loadedStringValue = sharedPreferences.getString(valueName, "getString(R.string.shared_preferences_loading_error)");
+
+            return loadedStringValue;
+        } else {
+            return "getString(R.string.shared_preferences_key_loading_error)";
+        }
+    }
+
+    public int loadInt(Context context, String valueName) {
+
+        sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
+
+        int loadedIntValue, defaultvalue;
+
+        defaultvalue = 0;
+
+        loadedIntValue = sharedPreferences.getInt(valueName, defaultvalue);
+
+        return loadedIntValue;
+    }
+
+    public boolean loadBoolean(Context context, String valueName) {
+
+        sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
+
+        boolean loadedBooleanValue, defaultvalue;
+
+        defaultvalue = false;
+
+        loadedBooleanValue = sharedPreferences.getBoolean(valueName, defaultvalue);
+
+        return loadedBooleanValue;
+    }
+
+    public float loadFloat(Context context, String valueName) {
+
+        sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
+
+        float loadedFloatValue, defaultvalue;
+
+        defaultvalue = 0;
+
+        loadedFloatValue = sharedPreferences.getFloat(valueName, defaultvalue);
+
+        return loadedFloatValue;
+    }
+
+    public long loadLong(Context context, String valueName) {
+
+        sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
+
+        long loadedLongValue, defaultvalue;
+
+        defaultvalue = 0;
+
+        loadedLongValue = sharedPreferences.getLong(valueName, defaultvalue);
+
+        return loadedLongValue;
+    }
+
+
+    //-----     Deleting      ------
+
+    public void deleteIndividualValue(Context context, String valueName) {
+        sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
+        editor.remove(valueName);
+
+        editor.apply();
+    }
+
+    public void deleteAllValues(Context context) {
+        sharedPreferences = context.getSharedPreferences(preferenceFilename, MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
+        editor.clear();
+
+        editor.apply();
+    }
 }
